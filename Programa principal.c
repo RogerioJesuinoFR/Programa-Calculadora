@@ -1,15 +1,13 @@
 /*Programa de calculadora*/
 
 #include <stdio.h>
-#include <windows.h> // biblioteca windows.h para usar SetConsoleCursorPosition()
+#include <windows.h>
 
 #define DISPLAY "\n\xDA\xC4\xC4\xC4\xC2\xC4\xC4\xC4\xC2\xC4\xC4\xC4\xC2\xC4\xC4\xC4\xBF\n\xB3 7 \xB3 8 \xB3 9 \xB3 / \xB3\n\xC3\xC4\xC4\xC4\xC5\xC4\xC4\xC4\xC5\xC4\xC4\xC4\xC5\xC4\xC4\xC4\xB4\n\xB3 4 \xB3 5 \xB3 6 \xB3 * \xB3\n\xC3\xC4\xC4\xC4\xC5\xC4\xC4\xC4\xC5\xC4\xC4\xC4\xC5\xC4\xC4\xC4\xB4\n\xB3 1 \xB3 2 \xB3 3 \xB3 - \xB3\n\xC3\xC4\xC4\xC4\xC5\xC4\xC4\xC4\xC5\xC4\xC4\xC4\xC5\xC4\xC4\xC4\xB4\n\xB3 C \xB3 0 \xB3 . \xB3 + \xB3 (pressione S para sair)\n\xC3\xC4\xC4\xC4\xC1\xC4\xC4\xC4\xC1\xC4\xC4\xC4\xC1\xC4\xC4\xC4\xB4\n\xB3               \xB3\n\xC0\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xD9"
 
-void MOSTRAR_DISPLAY();
-
 int main() 
 {
-    float NUM1, NUM2;
+    double NUM1, NUM2;
     char OPERACAO;
 
     do 
@@ -23,7 +21,7 @@ int main()
         coord.Y = 10; // Posição Y da coordenada (linha)
         SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 
-        scanf("%f", &NUM1);
+        scanf("%lf", &NUM1);
 
         do 
         {
@@ -37,7 +35,7 @@ int main()
             SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 
             // Limpar o espaço antes de imprimir o número
-            printf("%.2f\a", NUM1);
+            printf("%.2lf", NUM1);
 
             scanf(" %c", &OPERACAO);
 
@@ -45,13 +43,14 @@ int main()
             {
                 printf("\n\nSaindo do programa...\n\n");
                 break;
-            } else if (OPERACAO == 'c' || OPERACAO == 'C')
+            } 
+            else if (OPERACAO == 'c' || OPERACAO == 'C')
             {
                 NUM1 = 0;
                 break;
             }
 
-            scanf("%f", &NUM2);
+            scanf("%lf", &NUM2);
 
             system("cls");
 
@@ -77,7 +76,7 @@ int main()
                     break;
                 default:
                     printf("Opcao invalida!\n");
-                    continue; // Retorna ao início do loop sem alterar NUM1 e NUM2
+                    break; // Mostra mensagem de erro e pede a operação novamente
             }
 
         } while (OPERACAO != 's' && OPERACAO != 'S');
@@ -87,6 +86,7 @@ int main()
     getch();
     return 0;
 }
+
 
 
 
